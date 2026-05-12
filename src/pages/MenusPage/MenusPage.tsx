@@ -1,21 +1,25 @@
-import { Link } from 'react-router-dom'
+import { MenuCard } from '@/entities/menu/MenuCard'
+import { menus } from '@/entities/menu/mockData'
 
 export function MenusPage() {
   return (
     <div>
-      <h1>Menus Page</h1>
+      <h1>Menus</h1>
 
-      <ul>
-        <li>
-          <Link to="/menus/1">Open Menu 1</Link>
-        </li>
-
-        <li>
-          <Link to="/menus/2">Open Menu 2</Link>
-        </li>
-      </ul>
-
-      <Link to="/login">Go to Login</Link>
+      <div
+        style={{
+          display: 'grid',
+          gap: '16px',
+          marginTop: '24px',
+        }}
+      >
+        {menus.map(menu => (
+          <MenuCard
+            key={menu.id}
+            menu={menu}
+          />
+        ))}
+      </div>
     </div>
   )
 }
