@@ -3,11 +3,11 @@ import {
   RouterProvider,
 } from 'react-router-dom'
 
-import { MainLayout } from '../../shared/layouts/MainLayout'
+import { MainLayout } from '@/shared/layouts/MainLayout'
 
-import { LoginPage } from '../../pages/LoginPage/LoginPage'
-import { MenusPage } from '../../pages/MenusPage/MenusPage'
-import { MenuEditorPage } from '../../pages/MenuEditorPage/MenuEditorPage'
+import { LoginPage } from '@/pages/LoginPage/LoginPage'
+import { MenusPage } from '@/pages/MenusPage/MenusPage'
+import { MenuEditorPage } from '@/pages/MenuEditorPage/MenuEditorPage'
 
 const router = createBrowserRouter([
   {

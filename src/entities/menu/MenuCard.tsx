@@ -16,7 +16,7 @@ export function MenuCard({ menu }: Props) {
         border: '1px solid #ccc',
         borderRadius: '12px',
         textDecoration: 'none',
-        color: 'black',
+        color: 'white',
       }}
     >
       <h2>{menu.name}</h2>
