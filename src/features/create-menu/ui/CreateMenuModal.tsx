@@ -1,9 +1,13 @@
+import CreateMenuForm from "./CreateMenuForm"
+
 type CreateModalProps = {
     onClose: () => void
+    onCreateMenu: (name: string, description: string) => void
 }
 
 export default function CreateMenuModal({ 
     onClose,
+    onCreateMenu,
 }: CreateModalProps) {
     return ( 
         <div 
@@ -24,6 +28,10 @@ export default function CreateMenuModal({
                 <h2 className="text-2xl font-bold text-black">
                     Create Menu
                 </h2>
+
+                <CreateMenuForm
+                    onCreateMenu={onCreateMenu}
+                />
 
                 <button
                     className="
