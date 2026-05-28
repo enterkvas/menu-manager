@@ -31,6 +31,7 @@ export default function CreateMenuModal({
 
                 <CreateMenuForm
                     onCreateMenu={onCreateMenu}
+                    onClose={onClose}
                 />
 
                 <button
