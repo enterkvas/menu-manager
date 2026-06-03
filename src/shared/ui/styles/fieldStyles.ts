@@ -6,5 +6,5 @@ export const fieldBaseStyles = `
   text-sm
   focus:outline-none
   focus:ring-2
-  focus:ring-gray-300
+  focus:ring-blue-400
 `

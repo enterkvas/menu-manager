@@ -1,5 +1,5 @@
+import { useEffect, useRef, useState } from "react"
 import { fieldBaseStyles } from "@/shared/ui/styles/fieldStyles"
-import { useState } from "react"
 
 type CreateMenuFormProps = {
     onCreateMenu: (name: string, description: string) => void
@@ -16,6 +16,10 @@ export default function CreateMenuForm({
     const [isDescriptionTouched, setIsDescriptionTouched] = useState(false) 
     const [isSubmitting, setIsSubmitting] =
     useState(false)
+    const nameInputRef = useRef<HTMLInputElement>(null)
+    useEffect(() => {
+        nameInputRef.current?.focus()
+    }, [])
 
    const handleSubmit: React.SubmitEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault()
@@ -58,6 +62,7 @@ export default function CreateMenuForm({
                     </label>
 
                     <input
+                        ref={nameInputRef}                       
                         id="name"
                         type="text"
                         value={name}
@@ -71,7 +76,7 @@ export default function CreateMenuForm({
                                 : 'border-gray-300'
                             }                           
                         `}                        
-                        onBlur={() => setIsNameTouched(true)}                        
+                        onBlur={() => setIsNameTouched(true)} 
                     />
 
                     {isNameTouched && nameError && (

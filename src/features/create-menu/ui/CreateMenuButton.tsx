@@ -1,12 +1,17 @@
 type CreateMenuButtonProps = {
   onClick: () => void
+  buttonRef: React.RefObject<HTMLButtonElement | null>
 }
 
 export default function CreateMenuButton({
   onClick,
-}: CreateMenuButtonProps) {
+  buttonRef,
+}: CreateMenuButtonProps) {  
   return (
-    <button onClick={onClick}>
+    <button
+      ref={buttonRef} 
+      onClick={onClick}
+    >
       Create Menu
     </button>
   )

@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import CreateMenuForm from "./CreateMenuForm"
 
 type CreateModalProps = {
@@ -9,6 +10,21 @@ export default function CreateMenuModal({
     onClose,
     onCreateMenu,
 }: CreateModalProps) {
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') {
+            onClose()
+        }
+    }
+
+    useEffect(() => {
+        document.addEventListener('keydown', handleKeyDown)
+        
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown)
+        }
+    }, [onClose])    
+
     return ( 
         <div 
             className="
@@ -16,6 +32,7 @@ export default function CreateMenuModal({
                 flex items-center justify-center
                 bg-black/40    
             "
+            onClick={onClose}
         >
             <div 
                 className="
@@ -23,7 +40,9 @@ export default function CreateMenuModal({
                     rounded-lg
                     bg-white
                     p-6
-                    shadow-lg" 
+                    shadow-lg
+                "
+                onClick={(e) => e.stopPropagation()} 
             >
                 <h2 className="text-2xl font-bold text-black">
                     Create Menu

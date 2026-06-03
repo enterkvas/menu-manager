@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 
 import { MenuCard } from '@/entities/menu/MenuCard'
 import { mockMenus } from '@/entities/menu/mockData'
@@ -9,8 +9,9 @@ import type { Menu } from '@/entities/menu/types'
 
 export function MenusPage() {
   const [menus, setMenus] = useState(mockMenus)
-
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false)
+  const createButtonRef =
+  useRef<HTMLButtonElement>(null)
 
   const handleCreateMenu = (name: string, description: string) => {
     const newMenu: Menu = {
@@ -22,11 +23,18 @@ export function MenusPage() {
     setMenus((prev) => [...prev, newMenu])
   }
 
+  const handleCloseModal = () => {
+    setIsCreateModalOpen(false)
+    
+    createButtonRef.current?.focus()
+  }
+
   return (
     <div>
       <h1>Menus</h1>
 
       <CreateMenuButton
+        buttonRef={createButtonRef}
         onClick={() => setIsCreateModalOpen(true)}
       />
 
@@ -47,7 +55,7 @@ export function MenusPage() {
 
       {isCreateModalOpen && (
         <CreateMenuModal 
-          onClose={() => setIsCreateModalOpen(false)}
+          onClose={handleCloseModal}
           onCreateMenu={handleCreateMenu}
         />
       )}
