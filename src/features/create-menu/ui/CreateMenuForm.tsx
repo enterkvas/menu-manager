@@ -52,7 +52,6 @@ export default function CreateMenuForm({
     return (
         <form onSubmit={handleSubmit}>
             <div className="grid gap-4">
-
                 <div className="grid gap-1">
                     <label
                         htmlFor="name"
@@ -149,6 +148,6 @@ export default function CreateMenuForm({
                 </button>
 
             </div>
-            </form>
+        </form>
     )
 }

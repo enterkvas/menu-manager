@@ -1,5 +1,5 @@
-import { useEffect } from 'react'
 import CreateMenuForm from "./CreateMenuForm"
+import { Modal } from '@/shared/ui/modal/Modal'
 
 type CreateModalProps = {
     onClose: () => void
@@ -9,68 +9,14 @@ type CreateModalProps = {
 export default function CreateMenuModal({ 
     onClose,
     onCreateMenu,
-}: CreateModalProps) {
-
-    const handleKeyDown = (e: KeyboardEvent) => {
-        if (e.key === 'Escape') {
-            onClose()
-        }
-    }
-
-    useEffect(() => {
-        document.addEventListener('keydown', handleKeyDown)
-        
-        return () => {
-            document.removeEventListener('keydown', handleKeyDown)
-        }
-    }, [onClose])    
+}: CreateModalProps) {        
 
     return ( 
-        <div 
-            className="
-                fixed inset-0 z-50 
-                flex items-center justify-center
-                bg-black/40    
-            "
-            onClick={onClose}
-        >
-            <div 
-                className="
-                    w-full max-w-md
-                    rounded-lg
-                    bg-white
-                    p-6
-                    shadow-lg
-                "
-                onClick={(e) => e.stopPropagation()} 
-            >
-                <h2 className="text-2xl font-bold text-black">
-                    Create Menu
-                </h2>
-
-                <CreateMenuForm
-                    onCreateMenu={onCreateMenu}
-                    onClose={onClose}
-                />
-
-                <button
-                    className="
-                    mt-4
-                    rounded-md
-                    bg-blue-500
-                    px-4
-                    py-2
-                    text-sm
-                    font-medium
-                    text-white
-                    transition-colors
-                    hover:bg-blue-600
-                    "
-                    onClick={onClose}                    
-                >
-                    Close
-                </button>
-            </div>
-        </div>        
+        <Modal onClose={onClose}>
+            <h2 className="text-2xl font-bold text-black">
+                Create Menu
+            </h2>
+            <CreateMenuForm onCreateMenu={onCreateMenu} onClose={onClose} />
+        </Modal>        
     )
 }
