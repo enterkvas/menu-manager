@@ -35,6 +35,7 @@ export function Modal({
         >
             <div 
                 className="
+                    relative
                     w-full max-w-md
                     rounded-lg
                     bg-white
@@ -46,22 +47,32 @@ export function Modal({
                 {children}
 
                 <button
+                    type="button"
+                    onClick={onClose}
                     className="
-                    mt-4
-                    rounded-md
-                    bg-blue-500
-                    px-4
-                    py-2
-                    text-sm
-                    font-medium
-                    text-white
-                    transition-colors
-                    hover:bg-blue-600
+                        absolute
+                        right-3
+                        top-3
+
+                        flex
+                        h-8
+                        w-8
+                        items-center
+                        justify-center
+
+                        rounded-md
+
+                        text-xl
+                        
+                        text-gray-500
+                        transition-colors
+
+                        hover:bg-gray-100
+                        hover:text-gray-700
                     "
-                    onClick={onClose}                    
-                >
-                    Close
-                </button>
+                    >
+                    ×
+                    </button>
             </div>
         </div>
     )

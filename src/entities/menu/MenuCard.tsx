@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-
 import type { Menu } from './types'
 
 type Props = {
@@ -18,10 +17,11 @@ export function MenuCard({ menu }: Props) {
         textDecoration: 'none',
         color: 'white',
       }}
-    >
-      <h2>{menu.name}</h2>
+    >      
+        <h2>{menu.name}</h2>
 
-      <p>{menu.description}</p>
+        <p>{menu.description}</p>      
+
     </Link>
   )
 }

@@ -1,5 +1,4 @@
 import { useState, useRef } from 'react'
-
 import { MenuCard } from '@/entities/menu/MenuCard'
 import { mockMenus } from '@/entities/menu/mockData'
 
