@@ -22,8 +22,6 @@ export function MenuProvider({ children }: { children: ReactNode }) {
         createMenu,
     }
 
-    console.log('MenuProvider rendered')
-
     return (
         <MenuContext.Provider value={value}>
             {children}

@@ -3,6 +3,7 @@ import { MenuCard } from '@/entities/menu/MenuCard'
 import { useMenus } from '@/entities/menu/model/useMenus'
 import CreateMenuButton from '@/features/create-menu/ui/CreateMenuButton'
 import CreateMenuModal from '@/features/create-menu/ui/CreateMenuModal'
+import { Link } from 'react-router-dom'
 
 export function MenusPage() {
   const { menus, createMenu } = useMenus()
@@ -33,10 +34,17 @@ export function MenusPage() {
         }}
       >
         {menus.map(menu => (
-          <MenuCard
+          <Link 
             key={menu.id}
-            menu={menu}
-          />
+            to={`/menus/${menu.id}`} 
+            style={{ 
+              display: 'block',
+              textDecoration: 'none', 
+              color: 'white',
+            }}
+          >
+            <MenuCard menu={menu} />
+          </Link>
         ))}
       </div>
       {isCreateModalOpen && (
