@@ -8,13 +8,14 @@ export function MenuEditorPage() {
 
   const menu = menus.find((menu) => menu.id === menuId) 
   
-  return (
-  <div>
-    <h1>Menu Editor Page</h1>
+  if (!menu) {
+    return <p>Menu not found</p>
+  }
 
-    <p>Menu ID: {menuId}</p>
-    <p>Menu Name: {menu?.name}</p>
-    <p>Menu Description: {menu?.description}</p>
-  </div>
-)
+  return (
+    <>
+      <h1>{menu.name}</h1>
+      <p>{menu.description}</p>
+    </>
+  )
 }
