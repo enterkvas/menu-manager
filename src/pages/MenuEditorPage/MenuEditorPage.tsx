@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom'
 import { useMenus } from '@/entities/menu/model/useMenus'
+import { MenuEditor } from '@/features/menu-editor/ui/MenuEditor'
 
 export function MenuEditorPage() {
   const { menuId } = useParams()
@@ -13,9 +14,6 @@ export function MenuEditorPage() {
   }
 
   return (
-    <>
-      <h1>{menu.name}</h1>
-      <p>{menu.description}</p>
-    </>
+    <MenuEditor menu={menu} />
   )
 }
