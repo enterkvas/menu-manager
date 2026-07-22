@@ -1,12 +1,16 @@
-import type { Menu } from '@/entities/menu/types'
+import type { Menu, UpdateMenuData } from '@/entities/menu/types'
 import { useState } from 'react'
 
 type MenuEditorProps = {
     menu: Menu
+    onSave: (changes: UpdateMenuData) => void
 }
 
-export function MenuEditor({ menu }: MenuEditorProps) {
-    const [draft, setDraft] = useState(menu)    
+export function MenuEditor({ 
+    menu,
+    onSave,
+}: MenuEditorProps) {
+    const [draft, setDraft] = useState(menu) 
 
     return (
         <>
@@ -29,8 +33,16 @@ export function MenuEditor({ menu }: MenuEditorProps) {
                 }}
             />
 
-            <button type="button">
-                Not implemented
+            <button 
+                type="button"
+                onClick={() => {
+                    onSave({
+                        name: draft.name,
+                        description: draft.description,
+                    })
+                }}
+            >
+                Save
             </button>
 
         </>
