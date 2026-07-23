@@ -19,7 +19,7 @@ export function MenusPage() {
 
   return (
     <div>
-      <h1>Menus</h1>
+      <h1 className="text-2xl font-semibold">Menus</h1>
 
       <CreateMenuButton
         buttonRef={createButtonRef}
