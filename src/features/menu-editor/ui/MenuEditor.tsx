@@ -5,11 +5,13 @@ import { fieldBaseStyles } from '@/shared/ui/styles/fieldStyles'
 type MenuEditorProps = {
     menu: Menu
     onSave: (changes: UpdateMenuData) => void
+    onCancel: () => void
 }
 
 export function MenuEditor({ 
     menu,
     onSave,
+    onCancel,
 }: MenuEditorProps) {
     const [draft, setDraft] = useState(menu) 
 
@@ -19,8 +21,9 @@ export function MenuEditor({
         onSave({
             name: draft.name,
             description: draft.description,
-    })
-}
+        })
+
+    }
 
     return (
         <div className="mx-auto max-w-xl">
@@ -90,7 +93,14 @@ export function MenuEditor({
                         "
                     >
                         Save
-                    </button>                
+                    </button>
+
+                    <button 
+                        type='button'
+                        onClick={onCancel}
+                    >
+                        Cancel
+                    </button>             
                 </div>
             </form>
         </div>
