@@ -25,6 +25,10 @@ export function MenuEditor({
 
     }
 
+    const isDirty = 
+        draft.name !== menu.name || 
+        draft.description !== menu.description 
+
     return (
         <div className="mx-auto max-w-xl">
             <h1 className="mb-6 text-2xl font-semibold">
@@ -91,6 +95,7 @@ export function MenuEditor({
                             disabled:cursor-not-allowed
                             disabled:opacity-50
                         "
+                        disabled={!isDirty}
                     >
                         Save
                     </button>
