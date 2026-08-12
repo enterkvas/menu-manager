@@ -22,7 +22,15 @@ export function MenuEditorPage() {
     updateMenu(currentMenu.id, changes)
   }
 
-  function onCancel() {
+  function onCancel(isDirty: boolean) {
+    if(isDirty) {
+      const shouldDiscard = window.confirm(
+        "You have unsaved changes. Leave without saving?"
+      )
+      if (!shouldDiscard) {
+        return
+      }
+    }
     navigate("/")
   }
 

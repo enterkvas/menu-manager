@@ -5,7 +5,7 @@ import { fieldBaseStyles } from '@/shared/ui/styles/fieldStyles'
 type MenuEditorProps = {
     menu: Menu
     onSave: (changes: UpdateMenuData) => void
-    onCancel: () => void
+    onCancel: (isDirty: boolean) => void
 }
 
 export function MenuEditor({ 
@@ -102,7 +102,7 @@ export function MenuEditor({
 
                     <button 
                         type='button'
-                        onClick={onCancel}
+                        onClick={() => onCancel(isDirty)}
                     >
                         Cancel
                     </button>             
