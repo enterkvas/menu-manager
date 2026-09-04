@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { Menu, UpdateMenuData } from '@/entities/menu/types'
 import { fieldBaseStyles } from '@/shared/ui/styles/fieldStyles'
 
@@ -6,12 +6,14 @@ type MenuEditorProps = {
     menu: Menu
     onSave: (changes: UpdateMenuData) => void
     onCancel: (isDirty: boolean) => void
+    onDirtyChange: (isDirty: boolean) => void
 }
 
 export function MenuEditor({ 
     menu,
     onSave,
     onCancel,
+    onDirtyChange,
 }: MenuEditorProps) {
     const [draft, setDraft] = useState(menu) 
 
@@ -22,12 +24,15 @@ export function MenuEditor({
             name: draft.name,
             description: draft.description,
         })
-
     }
 
     const isDirty = 
         draft.name !== menu.name || 
         draft.description !== menu.description 
+
+    useEffect(() => {
+        onDirtyChange(isDirty)
+    }, [isDirty, onDirtyChange])
 
     return (
         <div className="mx-auto max-w-xl">
@@ -105,11 +110,9 @@ export function MenuEditor({
                         onClick={() => onCancel(isDirty)}
                     >
                         Cancel
-                    </button>             
+                    </button>
                 </div>
             </form>
         </div>
-        
-        
     )
 }
