@@ -1,9 +1,9 @@
 import { useState, useRef } from 'react'
+import { Link } from 'react-router-dom'
 import { MenuCard } from '@/entities/menu/MenuCard'
 import { useMenus } from '@/entities/menu/model/useMenus'
 import CreateMenuButton from '@/features/create-menu/ui/CreateMenuButton'
 import CreateMenuModal from '@/features/create-menu/ui/CreateMenuModal'
-import { Link } from 'react-router-dom'
 
 export function MenusPage() {
   const { menus, createMenu } = useMenus()
@@ -19,7 +19,7 @@ export function MenusPage() {
 
   return (
     <div>
-      <h1>Menus</h1>
+      <h1 className="text-2xl font-semibold">Menus</h1>
 
       <CreateMenuButton
         buttonRef={createButtonRef}

@@ -2,7 +2,7 @@ import { type ReactNode, useState } from 'react'
 import { mockMenus } from '../mockData'
 import { MenuContext } from './MenuContext'
 import type { MenuContextType } from './MenuContext'
-import type { Menu } from '../types'
+import type { Menu, UpdateMenuData } from "../types"
 
 export function MenuProvider({ children }: { children: ReactNode }) {
     const [menus, setMenus] = useState(mockMenus)
@@ -17,9 +17,14 @@ export function MenuProvider({ children }: { children: ReactNode }) {
         setMenus((prev) => [...prev, newMenu])
     }
 
+    function updateMenu(id: string, changes: UpdateMenuData) {
+        setMenus((prev) => prev.map((menu) => (menu.id === id ? { ...menu, ...changes } : menu)))
+    }
+
     const value: MenuContextType = {
         menus,
         createMenu,
+        updateMenu,
     }
 
     return (
