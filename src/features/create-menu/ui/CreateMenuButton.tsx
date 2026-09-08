@@ -23,6 +23,7 @@ export default function CreateMenuButton({
         focus:ring-2
         focus:ring-gray-400
         focus:ring-offset-2
+        cursor-pointer
       "
       ref={buttonRef} 
       onClick={onClick}
