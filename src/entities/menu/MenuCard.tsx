@@ -14,7 +14,7 @@ export function MenuCard({ menu }: Props) {
         borderRadius: '12px',
       }}
     >      
-        <h2>{menu.name}</h2>
+        <h2 className="text-xl font-semibold">{menu.name}</h2>
 
         <p>{menu.description}</p>      
 

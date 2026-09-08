@@ -13,7 +13,7 @@ export default function CreateMenuModal({
 
     return ( 
         <Modal onClose={onClose}>
-            <h2 className="text-2xl font-bold text-black">
+            <h2 className="text-xl font-bold text-black">
                 Create Menu
             </h2>
             <CreateMenuForm onCreateMenu={onCreateMenu} onClose={onClose} />
