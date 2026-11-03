@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { useNavigate, useParams, useBlocker } from 'react-router-dom'
 import { useMenus } from '@/entities/menu/model/useMenus'
 import { MenuEditor } from '@/features/menu-editor/ui/MenuEditor'
 import type { UpdateMenuData } from '@/entities/menu/types'
+import { Confirmation } from '@/shared/ui/confirmation/Confirmation'
 
 export function MenuEditorPage() {
   const { menuId } = useParams()
@@ -13,10 +14,24 @@ export function MenuEditorPage() {
 
   const [isFormDirty, setIsFormDirty] = useState(false)
 
-  const blocker = useBlocker(isFormDirty)
+  const skipBlockerRef = useRef(false)
 
-  const menu = menus.find((menu) => menu.id === menuId) 
-  
+  const [
+    isCancelConfirmationOpen,
+    setIsCancelConfirmationOpen,
+  ] = useState(false)
+
+  const blocker = useBlocker(() => {
+    if (skipBlockerRef.current) {
+      skipBlockerRef.current = false
+      return false
+    }
+
+    return isFormDirty
+  })
+
+  const menu = menus.find((menu) => menu.id === menuId)
+
   if (!menu) {
     return <p>Menu not found</p>
   }
@@ -32,14 +47,11 @@ export function MenuEditorPage() {
   }
 
   function onCancel(isDirty: boolean) {
-    if(isDirty) {
-      const shouldDiscard = window.confirm(
-        'You have unsaved changes. Leave without saving?'
-      )
-      if (!shouldDiscard) {
-        return
-      }
+    if (isDirty) {
+      setIsCancelConfirmationOpen(true)
+      return
     }
+
     navigate('/')
   }
 
@@ -53,73 +65,27 @@ export function MenuEditorPage() {
       />
 
       {blocker.state === 'blocked' && (
-        <div
-          className="
-            fixed inset-0 z-50
-            flex items-center justify-center
-            bg-black/40
-          "
-        >
-          <div
-            className="
-              w-full max-w-md
-              rounded-lg
-              bg-white
-              p-6
-              shadow-lg
-            "
-          >
-            <p>You have unsaved changes.</p>
-            <p>Are you sure you want to leave without saving?</p>
+        <Confirmation
+          title="Unsaved changes"
+          description="Are you sure you want to leave without saving?"
+          cancelLabel='Stay'
+          confirmLabel='Leave'
+          onCancel={() => blocker.reset()}
+          onConfirm={() => blocker.proceed()}
+        />
+      )}
 
-            <div
-              className="
-                mt-4
-                flex
-                justify-center
-                gap-4
-              "
-            >
-              <button
-                type='button'
-                className='
-                  px-4
-                  py-2
-                  bg-gray-500
-                  hover:bg-gray-600
-                  rounded-md
-                  text-sm
-                  font-medium
-                  text-white
-                  transition-colors
-                '
-                onClick={() => blocker.reset()}
-              >
-                Stay
-              </button>
-
-              <button
-                type='button'
-                className='
-                  px-4
-                  py-2
-                  bg-red-500
-                  hover:bg-red-600
-                  rounded-md
-                  text-sm
-                  font-medium
-                  text-white
-                  transition-colors
-                '
-                onClick={() => blocker.proceed()}
-              >
-                Leave
-              </button>
-            </div>
-
-          </div>
-        </div>
-
+      {isCancelConfirmationOpen && (
+        <Confirmation
+          title="Unsaved changes"
+          description="Leave without saving?"
+          onCancel={() => setIsCancelConfirmationOpen(false)}
+          onConfirm={() => {
+            skipBlockerRef.current = true
+            setIsCancelConfirmationOpen(false)
+            navigate('/')
+          }}
+        />
       )}
     </>
   )

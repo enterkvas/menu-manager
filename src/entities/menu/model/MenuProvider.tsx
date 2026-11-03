@@ -1,4 +1,4 @@
-import { type ReactNode, useState } from 'react'   
+import { type ReactNode, useState } from 'react'
 import { mockMenus } from '../mockData'
 import { MenuContext } from './MenuContext'
 import type { MenuContextType } from './MenuContext'
@@ -21,10 +21,15 @@ export function MenuProvider({ children }: { children: ReactNode }) {
         setMenus((prev) => prev.map((menu) => (menu.id === id ? { ...menu, ...changes } : menu)))
     }
 
+    function deleteMenu(id: string) {
+        setMenus((prev) => prev.filter((menu) => menu.id !== id))
+    }
+
     const value: MenuContextType = {
         menus,
         createMenu,
         updateMenu,
+        deleteMenu,
     }
 
     return (
