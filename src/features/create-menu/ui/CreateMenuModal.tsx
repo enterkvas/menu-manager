@@ -6,17 +6,17 @@ type CreateModalProps = {
     onCreateMenu: (name: string, description: string) => void
 }
 
-export default function CreateMenuModal({ 
+export default function CreateMenuModal({
     onClose,
     onCreateMenu,
-}: CreateModalProps) {        
+}: CreateModalProps) {
 
-    return ( 
+    return (
         <Modal onClose={onClose}>
-            <h2 className="text-2xl font-bold text-black">
+            <h2 className="text-xl font-bold text-black">
                 Create Menu
             </h2>
             <CreateMenuForm onCreateMenu={onCreateMenu} onClose={onClose} />
-        </Modal>        
+        </Modal>
     )
 }

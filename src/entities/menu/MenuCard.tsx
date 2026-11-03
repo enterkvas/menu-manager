@@ -1,10 +1,15 @@
 import type { Menu } from './types'
+import { Link } from 'react-router-dom'
 
 type Props = {
   menu: Menu
+  onDelete: (id: string) => void
 }
 
-export function MenuCard({ menu }: Props) {
+export function MenuCard({
+    menu,
+    onDelete
+}: Props) {
   return (
     <div
       style={{
@@ -13,11 +18,25 @@ export function MenuCard({ menu }: Props) {
         border: '1px solid #ccc',
         borderRadius: '12px',
       }}
-    >      
-        <h2>{menu.name}</h2>
+    >
+      <Link
+        to={`/menus/${menu.id}`}
+        style={{
+          display: 'block',
+          textDecoration: 'none',
+          color: 'white',
+        }}
+      >
+        <h2 className="text-xl font-semibold">{menu.name}</h2>
+        <p>{menu.description}</p>
+      </Link>
 
-        <p>{menu.description}</p>      
-
+      <button
+        type="button"
+        onClick={() => onDelete(menu.id)}
+      >
+        Delete
+      </button>
     </div>
   )
 }

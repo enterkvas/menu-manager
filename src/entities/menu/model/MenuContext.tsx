@@ -1,12 +1,17 @@
 import { createContext } from 'react'
-import type { Menu } from '../types'
+import type { Menu, UpdateMenuData } from "../types"
 
 export type MenuContextType = {
     menus: Menu[]
     createMenu: (
-        name: string, 
+        name: string,
         description: string
     ) => void
+    updateMenu: (
+        id: string,
+        changes: UpdateMenuData
+    ) => void
+    deleteMenu: (id: string) => void
 }
 
 export const MenuContext = createContext<MenuContextType | undefined>(undefined)

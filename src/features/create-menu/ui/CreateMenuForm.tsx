@@ -45,9 +45,7 @@ export default function CreateMenuForm({
     const trimmedDescription = description.trim()
     const nameError = trimmedName === "" ? "Menu name is required" : ""
     const descriptionError = trimmedDescription === "" ? "Description is required" : ""
-    const isFormValid =
-  !nameError &&
-  !descriptionError
+    const isFormValid = !nameError && !descriptionError
 
     return (
         <form onSubmit={handleSubmit}>
